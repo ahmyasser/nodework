@@ -27,7 +27,7 @@ fs.appendFile('server.log',log+' \n', (err)=>{
     res.render('maintenance.hbs',{
         title: 'temp page',
         paragraph: 'the website is under maintenance'});
-    next;
+    next();
 });
 
 hbs.registerHelper('screamIt',(Sstring)=>
