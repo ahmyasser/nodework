@@ -2,7 +2,7 @@ const express = require('express');
 const hbs = require('hbs');
 const fs =require('fs');
 
-var port = process.env.PORT || 3000 ;
+var port = 3000 ;// || process.env.PORT  ;
 
 var app = express();
 app.use(express.static( __dirname + '/public'));
@@ -24,9 +24,9 @@ fs.appendFile('server.log',log+' \n', (err)=>{
         console.log('not appending');
     }});
 
-    res.render('maintenance.hbs',{
-        title: 'temp page',
-        paragraph: 'the website is under maintenance'});
+    // res.render('maintenance.hbs',{
+    //     title: 'temp page',
+    //     paragraph: 'the website is under maintenance'});
     next();
 });
 
