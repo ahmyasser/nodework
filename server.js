@@ -2,29 +2,32 @@ const express = require('express');
 const hbs = require('hbs');
 const fs =require('fs');
 
-var port = process.env.PORT|| 3000 ;
+var port = process.env.PORT || 3000 ;
 
 var app = express();
 app.use(express.static( __dirname + '/public'));
 
 app.set('view engine','hbs');
+
 hbs.registerPartials(__dirname + '/views/partails');
 hbs.registerHelper('year',()=>{
     return new Date().getFullYear();
 });
+
 app.use((req,res,next) =>{
 var log = new Date().toString()+': '+ req.method+ ' ' +req.url;
 
 console.log(log);
+
 fs.appendFile('server.log',log+' \n', (err)=>{
     if(err){
         console.log('not appending');
-    }
+    }});
 
     res.render('maintenance.hbs',{
         title: 'temp page',
         paragraph: 'the website is under maintenance'});
-} )
+    next;
 });
 
 hbs.registerHelper('screamIt',(Sstring)=>
